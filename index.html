@@ -377,12 +377,14 @@ function updateStats(){
 }
 
 function toggleDone(id){
+  id=Number(id);
   checked[id]=!checked[id];
   localStorage.setItem('ck_done',JSON.stringify(checked));
   render();
 }
 
 function cpCap(id,btn){
+  id=Number(id);
   const t=content.find(x=>x.id===id);
   navigator.clipboard.writeText(t.caption+'\n\n'+t.hashtags.join(' ')).then(()=>{
     const o=btn.innerHTML;btn.innerHTML='✅ Tersalin!';btn.classList.add('ok');
@@ -411,6 +413,7 @@ function cpBio(id,btn){
 }
 
 function openModal(id){
+  id=Number(id);
   curId=id;curTab='caption';
   const t=content.find(x=>x.id===id);
   document.getElementById('mTitle').textContent=`Hari ${t.day} — ${t.title}`;
@@ -442,7 +445,7 @@ function updMCopy(){
   document.getElementById('mcopyBtn').textContent=lb[curTab]||'📋 Copy';
 }
 function copyModal(){
-  const t=content.find(x=>x.id===curId);
+  const t=content.find(x=>x.id===Number(curId));
   let tx='';
   if(curTab==='caption') tx=t.caption+'\n\n'+t.hashtags.join(' ');
   else if(curTab==='prompt') tx=t.prompt||'';
@@ -515,3 +518,4 @@ render();
 </script>
 </body>
 </html>
+
