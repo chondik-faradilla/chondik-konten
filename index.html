@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0F1923">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Chondik — Kit Konten Personal Brand</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+:root{
+  --dark:#0F1923;--accent:#E8500A;--accent2:#FB923C;
+  --green:#16A34A;--blue:#2563EB;--red:#DC2626;
+  --bg:#F7F6F3;--white:#FFFFFF;
+  --g100:#F1F0EC;--g200:#E4E2DC;--g500:#6B7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
+
+/* HERO */
+.hero{background:var(--dark);padding:28px 16px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(232,80,10,.2) 0%,transparent 60%)}
+.hero-eye{display:inline-block;background:rgba(232,80,10,.2);color:#FB923C;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;border:1px solid rgba(232,80,10,.3)}
+.hero h1{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.2;position:relative}
+.hero h1 span{color:#FB923C}
+.hero p{color:rgba(255,255,255,.55);font-size:.75rem;max-width:360px;margin:0 auto 14px;line-height:1.6;position:relative}
+.hero-badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;position:relative}
+.hbadge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);padding:3px 9px;border-radius:20px;font-size:.62rem;font-weight:600}
+
+/* MONTH BAR */
+.month-bar{background:var(--white);border-bottom:1px solid var(--g200);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.month-info{flex:1}
+.month-label{font-size:.65rem;font-weight:700;color:var(--g500)}
+.month-current{font-size:.88rem;font-weight:800;color:var(--dark)}
+.btn-gen{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0}
+.btn-gen:disabled{background:#ccc;cursor:not-allowed}
+.btn-gen:active{transform:scale(.97)}
+
+/* BIO */
+.bio-section{padding:14px 14px 0}
+.sec-head{font-size:.7rem;font-weight:800;color:var(--dark);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.bio-tabs{display:flex;gap:5px;margin-bottom:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.bio-tabs::-webkit-scrollbar{display:none}
+.bio-tab{padding:5px 12px;border-radius:20px;border:1.5px solid var(--g200);background:var(--white);font-family:inherit;font-size:.68rem;font-weight:700;cursor:pointer;color:var(--g500);white-space:nowrap;flex-shrink:0}
+.bio-tab.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+.bio-content{display:none}
+.bio-content.active{display:block}
+.bio-text{background:var(--g100);border-radius:9px;padding:10px 12px;font-size:.78rem;line-height:1.85;color:var(--dark);white-space:pre-line;border:1px solid var(--g200);margin-bottom:7px}
+.btn-cbio{width:100%;padding:8px;background:var(--dark);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.75rem;font-weight:700;cursor:pointer}
+.btn-cbio.ok{background:var(--green)}
+
+/* STATS + PROGRESS */
+.stats-row{background:var(--white);padding:8px 14px;border-top:1px solid var(--g200);border-bottom:1px solid var(--g200);display:flex;gap:14px;margin-top:10px}
+.stat{font-size:.68rem;font-weight:700;color:var(--g500)}
+.stat span{color:var(--accent);font-weight:800}
+.prog-wrap{padding:8px 14px 0}
+.prog-bar{background:var(--g200);border-radius:20px;height:5px;overflow:hidden}
+.prog-fill{background:var(--accent);height:100%;border-radius:20px;transition:width .3s}
+.prog-label{font-size:.65rem;color:var(--g500);margin-top:3px;font-weight:600}
+
+/* FILTER */
+.filter-wrap{background:var(--white);border-bottom:1px solid var(--g200);padding:8px 14px;overflow-x:auto;display:flex;gap:5px;align-items:center;scrollbar-width:none}
+.filter-wrap::-webkit-scrollbar{display:none}
+.filter-wrap label{font-size:.62rem;font-weight:700;color:var(--g500);white-space:nowrap;flex-shrink:0}
+.fbtn{padding:4px 10px;border-radius:20px;border:1.5px solid var(--g200);background:var(--white);font-family:inherit;font-size:.65rem;font-weight:700;cursor:pointer;color:var(--g500);white-space:nowrap;flex-shrink:0}
+.fbtn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* GRID */
+.grid{padding:10px 14px;display:flex;flex-direction:column;gap:10px}
+
+/* CARD */
+.card{background:var(--white);border-radius:13px;border:1px solid var(--g200);overflow:hidden}
+.card-top{padding:9px 12px 0;display:flex;align-items:center;justify-content:space-between}
+.pbadge{padding:3px 8px;border-radius:20px;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.pb-ig{background:#FFF0F5;color:#E1306C}
+.pb-fb{background:#EEF2FF;color:#1877F2}
+.pb-yt{background:#FFF5F5;color:#CC0000}
+.ftag{font-size:.6rem;font-weight:700;color:var(--g500);background:var(--g100);padding:2px 6px;border-radius:5px}
+.card-prev{margin:7px 12px;background:var(--g100);border-radius:8px;padding:9px 11px;position:relative;overflow:hidden;border:1px solid var(--g200)}
+.prev-emoji{position:absolute;right:-4px;top:-4px;font-size:3rem;opacity:.1;line-height:1}
+.prev-text{font-size:.72rem;line-height:1.7;color:var(--dark);position:relative;z-index:1}
+.card-body{padding:0 12px 12px}
+.pilar-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:5px;margin:5px 0}
+.card-title{font-size:.85rem;font-weight:800;color:var(--dark);margin-bottom:5px;line-height:1.35}
+.card-desc{font-size:.72rem;color:var(--g500);line-height:1.6;margin-bottom:7px}
+.card-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:7px;align-items:center}
+.meta-i{font-size:.65rem;font-weight:600;color:var(--g500)}
+.eng-tag{font-size:.62rem;font-weight:700;padding:2px 6px;border-radius:5px}
+.card-tip{background:#FFF7ED;border-radius:7px;padding:7px 9px;font-size:.68rem;color:#9A3412;margin-bottom:7px;border:1px solid #FED7AA;line-height:1.55}
+.card-tip strong{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.card-btns{display:flex;gap:5px}
+.btn-cc{flex:1;padding:8px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer}
+.btn-cc.ok{background:var(--green)}
+.btn-det{padding:8px 10px;border:1.5px solid var(--g200);border-radius:7px;background:var(--white);font-family:inherit;font-size:.68rem;font-weight:700;cursor:pointer;color:var(--g500)}
+.btn-chk{padding:8px 10px;border:1.5px solid var(--g200);border-radius:7px;background:var(--white);font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;color:var(--g500);min-width:36px}
+.btn-chk.done{background:var(--green);border-color:var(--green);color:#fff}
+.done-badge{display:inline-block;font-size:.58rem;font-weight:700;padding:2px 6px;border-radius:4px;background:#D1FAE5;color:#065F46;margin-left:5px}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.overlay.open{display:block}
+.modal{background:var(--white);border-radius:18px 18px 0 0;position:fixed;bottom:0;left:0;right:0;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal-head{background:var(--dark);padding:16px 18px;position:sticky;top:0;z-index:10}
+.modal-head h3{font-size:.9rem;font-weight:800;color:#fff;padding-right:28px;line-height:1.35;margin-bottom:3px}
+.modal-head p{font-size:.67rem;color:rgba(255,255,255,.5)}
+.mclose{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.12);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.modal-body{padding:14px 18px 28px}
+.mtabs{display:flex;gap:4px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.mtabs::-webkit-scrollbar{display:none}
+.mtab{padding:5px 11px;border-radius:7px;font-size:.68rem;font-weight:700;cursor:pointer;border:1.5px solid var(--g200);color:var(--g500);background:none;font-family:inherit;white-space:nowrap;flex-shrink:0}
+.mtab.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+.msec{display:none}
+.msec.active{display:block}
+.msec-title{font-size:.65rem;font-weight:800;color:var(--dark);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px}
+.mbox{background:var(--g100);border:1px solid var(--g200);border-radius:9px;padding:11px;font-size:.78rem;line-height:1.85;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif;color:var(--dark);max-height:260px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.prompt-box{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:9px;padding:11px;font-size:.75rem;line-height:1.8;color:#1E40AF;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif;max-height:260px;overflow-y:auto}
+.capcut-box{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:9px;padding:11px;font-size:.75rem;line-height:1.8;color:#14532D;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif;max-height:260px;overflow-y:auto}
+.htags{display:flex;flex-wrap:wrap;gap:5px}
+.htag{background:var(--g100);color:var(--blue);padding:4px 10px;border-radius:20px;font-size:.68rem;font-weight:700;cursor:pointer;border:1px solid var(--g200)}
+.htag:active{background:var(--blue);color:#fff}
+.mcopy{width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;margin-top:10px}
+.mcopy.ok{background:var(--green)}
+
+/* GENERATING */
+.gen-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,35,.94);z-index:500;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px}
+.gen-overlay.open{display:flex}
+.gen-spinner{width:44px;height:44px;border:3px solid rgba(232,80,10,.3);border-top-color:#E8500A;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gen-title{color:#fff;font-size:1rem;font-weight:700}
+.gen-sub{color:rgba(255,255,255,.5);font-size:.75rem;line-height:1.6;max-width:260px}
+.gen-prog{width:220px;background:rgba(255,255,255,.1);border-radius:20px;height:4px;overflow:hidden}
+.gen-fill{background:#E8500A;height:100%;border-radius:20px;transition:width .5s}
+
+/* AI KEY MODAL */
+.key-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;align-items:flex-end;justify-content:center;padding:0}
+.key-overlay.open{display:flex}
+.key-modal{background:var(--white);border-radius:18px 18px 0 0;width:100%;padding:20px 18px 32px}
+.key-modal h3{font-size:1rem;font-weight:800;margin-bottom:6px}
+.key-modal p{font-size:.78rem;color:var(--g500);line-height:1.65;margin-bottom:14px}
+.key-input{width:100%;padding:11px 14px;border:1.5px solid var(--g200);border-radius:10px;font-family:inherit;font-size:.82rem;outline:none;margin-bottom:10px}
+.key-input:focus{border-color:var(--accent)}
+.key-btns{display:flex;gap:8px}
+.key-confirm{flex:1;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer}
+.key-cancel{padding:11px 16px;border:1.5px solid var(--g200);border-radius:10px;background:var(--white);font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--g500)}
+.key-note{font-size:.68rem;color:var(--g500);margin-top:8px;line-height:1.6}
+.key-note a{color:var(--blue)}
+.key-free{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:9px;padding:10px 12px;font-size:.72rem;color:#14532D;margin-bottom:12px;line-height:1.6}
+.key-free strong{display:block;margin-bottom:3px;font-size:.7rem}
+
+@media(min-width:600px){
+  .grid{display:grid;grid-template-columns:repeat(2,1fr)}
+  .modal{border-radius:18px;position:relative;max-width:560px;margin:24px auto;bottom:auto}
+  .overlay{display:flex;align-items:flex-start;justify-content:center;padding:20px}
+  .overlay.open{display:flex}
+  .key-overlay{align-items:center}
+  .key-modal{border-radius:18px;max-width:440px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eye">Personal Brand Kit · Chondik</div>
+  <h1>Konten <span>30 Hari</span> Siap Pakai</h1>
+  <p>Caption, Prompt ChatGPT, Teks CapCut — tinggal copy paste. Generate ulang tiap bulan.</p>
+  <div class="hero-badges">
+    <span class="hbadge">📷 Instagram</span>
+    <span class="hbadge">👥 Facebook</span>
+    <span class="hbadge">▶️ YouTube</span>
+    <span class="hbadge">🎬 CapCut</span>
+    <span class="hbadge">🤖 AI Powered</span>
+  </div>
+</div>
+
+<div class="month-bar">
+  <div class="month-info">
+    <div class="month-label">Konten aktif</div>
+    <div class="month-current" id="monthLabel">Bulan 1 — Juni 2026</div>
+  </div>
+  <button class="btn-gen" id="genBtn" onclick="showKeyModal()">🤖 Generate Bulan Baru</button>
+</div>
+
+<div class="bio-section">
+  <div class="sec-head">📌 Bio Profil</div>
+  <div class="bio-tabs">
+    <button class="bio-tab active" onclick="swBio('ig',this)">📷 Instagram</button>
+    <button class="bio-tab" onclick="swBio('fb',this)">👥 Facebook</button>
+    <button class="bio-tab" onclick="swBio('yt',this)">▶️ YouTube</button>
+  </div>
+  <div id="bio-ig" class="bio-content active">
+    <div class="bio-text" id="btxt-ig">Chondik Faradilla
+Dari pengamen → pengusaha 🎸➡️💼
+Bantu anak muda 18–30 tidak buang waktu
+📍 Malang | Founder @markbro.id
+⬇️ Ebook gratis untuk kamu</div>
+    <button class="btn-cbio" onclick="cpBio('btxt-ig',this)">📋 Copy Bio Instagram</button>
+  </div>
+  <div id="bio-fb" class="bio-content">
+    <div class="bio-text" id="btxt-fb">Chondik Faradilla
+Pengusaha Malang | Founder Markbro & 3DPotret
+Berbagi cerita hidup, mindset, dan peluang
+untuk anak muda yang tidak mau buang waktu.
+"Terlambat bukan alasan — saya buktinya."</div>
+    <button class="btn-cbio" onclick="cpBio('btxt-fb',this)">📋 Copy Bio Facebook</button>
+  </div>
+  <div id="bio-yt" class="bio-content">
+    <div class="bio-text" id="btxt-yt">Nama channel: Chondik — Jangan Terlambat
+
+Deskripsi:
+Halo, saya Chondik. Dulu pengamen, sekarang pengusaha. Bukan karena bakat — tapi karena tidak berhenti. Di sini saya berbagi cerita, mindset, dan langkah nyata untuk kamu yang usia 18–30 dan tidak mau buang waktu.</div>
+    <button class="btn-cbio" onclick="cpBio('btxt-yt',this)">📋 Copy Bio YouTube</button>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat">Total: <span id="statTotal">0</span></div>
+  <div class="stat">Sudah posting: <span id="statDone">0</span></div>
+  <div class="stat">Sisa: <span id="statLeft">0</span></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-label" id="progLabel">0 dari 0 konten selesai</div>
+</div>
+
+<div class="filter-wrap">
+  <label>Filter:</label>
+  <button class="fbtn active" onclick="setF('all',this)">Semua</button>
+  <button class="fbtn" onclick="setF('instagram',this)">📷 IG</button>
+  <button class="fbtn" onclick="setF('facebook',this)">👥 FB</button>
+  <button class="fbtn" onclick="setF('youtube',this)">▶️ YT</button>
+  <button class="fbtn" onclick="setF('cerita',this)">🟠 Cerita</button>
+  <button class="fbtn" onclick="setF('waktu',this)">🔴 Waktu</button>
+  <button class="fbtn" onclick="setF('tips',this)">🟣 Tips</button>
+  <button class="fbtn" onclick="setF('engage',this)">🔵 Engage</button>
+  <button class="fbtn" onclick="setF('promo',this)">🟢 Promo</button>
+  <button class="fbtn" onclick="setF('pending',this)">⏳ Belum</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<!-- MODAL DETAIL -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-head">
+      <button class="mclose" onclick="document.getElementById('overlay').classList.remove('open')">✕</button>
+      <h3 id="mTitle"></h3>
+      <p id="mMeta"></p>
+    </div>
+    <div class="modal-body">
+      <div class="mtabs">
+        <button class="mtab active" onclick="swTab('caption',this)">📝 Caption</button>
+        <button class="mtab" onclick="swTab('prompt',this)">🤖 ChatGPT</button>
+        <button class="mtab" onclick="swTab('capcut',this)">🎬 CapCut</button>
+        <button class="mtab" onclick="swTab('hashtag',this)">🏷️ Hashtag</button>
+      </div>
+      <div id="ms-caption" class="msec active">
+        <div class="msec-title">Caption Lengkap</div>
+        <div class="mbox" id="mCaption"></div>
+      </div>
+      <div id="ms-prompt" class="msec">
+        <div class="msec-title">Prompt untuk ChatGPT — buat gambar visual</div>
+        <div class="prompt-box" id="mPrompt"></div>
+      </div>
+      <div id="ms-capcut" class="msec">
+        <div class="msec-title">Teks CapCut — urutan scene video</div>
+        <div class="capcut-box" id="mCapcut"></div>
+      </div>
+      <div id="ms-hashtag" class="msec">
+        <div class="msec-title">Hashtag (ketuk untuk copy satu per satu)</div>
+        <div class="htags" id="mHashtags"></div>
+      </div>
+      <button class="mcopy" id="mcopyBtn" onclick="copyModal()">📋 Copy Caption + Hashtag</button>
+    </div>
+  </div>
+</div>
+
+<!-- API KEY MODAL -->
+<div class="key-overlay" id="keyOverlay">
+  <div class="key-modal">
+    <h3>🤖 Generate Konten Bulan Baru</h3>
+    <div class="key-free">
+      <strong>💡 Cara dapat API Key GRATIS:</strong>
+      1. Buka console.anthropic.com<br>
+      2. Daftar gratis (pakai Gmail)<br>
+      3. Klik API Keys → Create Key<br>
+      4. Copy dan paste di bawah<br>
+      Kredit gratis $5 untuk pengguna baru — cukup untuk ratusan generate!
+    </div>
+    <p>Masukkan API Key Anthropic kamu. Key tidak disimpan di server — hanya dipakai sekali untuk generate konten.</p>
+    <input type="password" class="key-input" id="apiKeyInput" placeholder="sk-ant-api03-..." />
+    <div class="key-btns">
+      <button class="key-cancel" onclick="document.getElementById('keyOverlay').classList.remove('open')">Batal</button>
+      <button class="key-confirm" onclick="confirmKey()">Generate Sekarang 🚀</button>
+    </div>
+    <div class="key-note">Key kamu aman — tidak dikirim ke server manapun selain Anthropic. <a href="https://console.anthropic.com" target="_blank">Buat key di sini →</a></div>
+  </div>
+</div>
+
+<!-- GENERATING OVERLAY -->
+<div class="gen-overlay" id="genOverlay">
+  <div class="gen-spinner"></div>
+  <div class="gen-title">🤖 AI sedang bekerja...</div>
+  <div class="gen-sub" id="genSub">Membuat 30 konten fresh untuk bulan ini. Sabar ya, sekitar 30–60 detik.</div>
+  <div class="gen-prog"><div class="gen-fill" id="genFill" style="width:5%"></div></div>
+</div>
+
+<script>
+// ========== DATA ==========
+const month1=[{id:1,day:1,platform:'instagram',format:'Reels · Teks+Musik',pilar:'cerita',emoji:'🎸',title:'Dari pengamen ke pengusaha — ini cerita saya',preview:'Perkenalan diri yang jujur dan kuat. Hook pertama personal brand Chondik.',desc:'Konten pembuka. Ceritakan perjalanan dari pengamen sampai pengusaha.',time:'19.00–21.00',eng:'Very High',tip:'Teks putih di background gelap. Musik lo-fi slow atau cinematic.',caption:`Kalau kamu pikir kamu sudah terlambat —\n\nSaya dulu pengamen di cafe hotel. Usia 30 tahun masih tidak punya gaji tetap. Teman-teman sudah punya karir, saya masih cari arah.\n\nTapi dari titik itu, saya mulai.\n\nBukan karena tiba-tiba punya modal. Tapi karena saya memilih untuk tidak diam.\n\nSekarang saya punya bisnis sendiri di Malang. Sudah lebih dari 10 tahun.\n\nKalau saya bisa — kamu yang masih 20-an jauh lebih bisa.\n\nIkuti saya kalau kamu tidak mau buang waktu yang kamu punya.`,hashtags:['#chondik','#terlambatbukanhalangan','#pengusahamuda','#motivasiindonesia','#anakmudasukses','#janganterlambat'],prompt:`Desain Reels Instagram 9:16 (1080x1920px). Background hitam gelap #0F1923. Teks besar bold putih di tengah:\nSlide 1: "Dulu saya pengamen di cafe hotel."\nSlide 2: "Usia 30. Tidak punya gaji tetap."\nSlide 3: "Sekarang punya bisnis sendiri."\nSlide 4: "Bukan karena bakat."\nSlide 5: "Tapi karena tidak berhenti." (warna oranye #E8500A)\nWatermark @chondik pojok kanan bawah. Font bold modern. Clean minimalis.`,capcut:`Scene 1 (2 dtk): "Kalau kamu pikir sudah terlambat..." — putih, fade in\nScene 2 (2 dtk): "Dulu saya pengamen di cafe hotel." — bold putih\nScene 3 (2 dtk): "Usia 30. Tidak punya gaji tetap." — highlight 30 oranye\nScene 4 (2 dtk): "Sekarang punya bisnis sendiri." — scale up\nScene 5 (3 dtk): "Bukan karena bakat." / "Tapi karena tidak berhenti." — oranye bold\nScene 6 (2 dtk): "Follow @chondik" — abu kecil\nMusik: Lo-fi slow. Durasi ~13 detik.`},{id:2,day:2,platform:'instagram',format:'Reels · Teks Cepat',pilar:'waktu',emoji:'⏰',title:'Usia 20 saya: kuliah + kerja + band + dagang orang tua',preview:'Teks berganti cepat. Ajak audiens bandingkan aktivitas mereka di usia 20.',desc:'Peringatan waktu untuk anak muda yang banyak scrolling.',time:'19.00–21.00',eng:'Very High',tip:'Ganti teks setiap 1 detik. Ritme cepat. Akhiri dengan pertanyaan.',caption:`Di usia 20, saya kuliah sambil kerja, ikut band di cafe hotel, dan kalau malam bantu orang tua dagang di pasar.\n\nBukan karena saya luar biasa. Tapi karena tidak ada pilihan lain.\n\nDan justru dari situ saya belajar: waktu yang kamu sia-siakan hari ini, tidak akan pernah kembali.\n\nKamu sekarang usia 20-an. Medsos boleh — tapi jangan sampai itu satu-satunya yang kamu lakukan.\n\nTulis di komentar — sekarang kamu lagi ngapain untuk masa depanmu?`,hashtags:['#chondik','#waktuterbatas','#anakmudasukses','#motivasipagi','#produktivitasmuda'],prompt:`Reels 9:16 teks cepat. Background #0F1923. Frame terpisah:\n"Usia 20 saya:"\n→ "Kuliah."\n→ "Kerja paruh waktu."\n→ "Band di cafe malam."\n→ "Bantu orang tua dagang."\n→ "Kamu usia 20 ngapain?" (oranye besar)\nWatermark @chondik.`,capcut:`Scene 1 (1 dtk): "Usia 20 saya:"\nScene 2 (1 dtk): "Kuliah."\nScene 3 (1 dtk): "Kerja paruh waktu."\nScene 4 (1 dtk): "Band di cafe malam."\nScene 5 (1 dtk): "Bantu orang tua dagang."\nScene 6 (0.5 dtk): [kosong]\nScene 7 (2 dtk): "Kamu usia 20 ngapain?" (oranye bold)\nMusik: Beat cepat. Total ~10 detik.`},{id:3,day:3,platform:'instagram',format:'Carousel · 6 Slide',pilar:'tips',emoji:'💡',title:'5 tanda kamu sedang buang waktu tanpa sadar',preview:'Cover: "5 tanda buang waktu" — sangat shareable dan relate.',desc:'Carousel tips mudah disimpan. Format terbaik jangkauan organik.',time:'11.00–13.00',eng:'High',tip:'Cover harus eye-catching. Slide terakhir ada CTA dan @chondik.',caption:`Dulu saya juga tidak sadar sedang buang waktu.\n\nSaya kira sibuk itu sama dengan produktif. Ternyata tidak.\n\nCek carousel ini — kalau kamu ada di salah satunya, itu tanda untuk mulai berubah.\n\nSimpan postingan ini. Kirim ke teman yang butuh reminder.`,hashtags:['#chondik','#produktivitas','#mindsetpositif','#anakmudasukses','#selfimprovement'],prompt:`6 slide carousel 1080x1080px. Background #0F1923. Aksen oranye #E8500A.\nSlide 1 (Cover): "5 Tanda Kamu Buang Waktu Tanpa Sadar"\nSlide 2: "01 — Scroll medsos lebih dari 2 jam sehari"\nSlide 3: "02 — Kerja keras tapi tidak tahu tujuannya"\nSlide 4: "03 — Selalu nunggu siap sebelum mulai"\nSlide 5: "04 — Teman maju, kamu di tempat yang sama"\nSlide 6: "05 — Tidak belajar hal baru sebulan ini"\nPenutup: "Saya pernah di semua titik ini. — @chondik"`,capcut:`Scene 1: "5 Tanda Buang Waktu" (oranye bold)\nScene 2-6: tiap tanda muncul 2 detik\nScene 7: "Saya pernah di semua titik ini."\nScene 8: "Dan saya pilih berubah." (oranye)\nMusik: lo-fi thoughtful.`},{id:4,day:4,platform:'instagram',format:'Story · Poll',pilar:'engage',emoji:'🗳️',title:'Poll — Kamu lebih takut mana?',preview:'Poll: "Gagal coba bisnis" vs "Kerja selamanya di tempat yang salah"',desc:'Story poll untuk memancing interaksi pertama.',time:'20.00–22.00',eng:'High',tip:'Buat story lanjutan esok: share hasil poll.',caption:`[Teks Story Instagram]\n\nKamu lebih takut mana?\n👇 Pilih jujur ya`,hashtags:['#chondik','#poll','#karirvsusaha'],prompt:`Story 9:16 1080x1920px. Background #0F1923.\nTeks besar center putih: "Kamu lebih takut mana?"\nSpace untuk stiker poll IG.\nSub kecil: "Jawab jujur — tidak ada yang menghakimi"\n@chondik pojok bawah.`,capcut:`[Gunakan langsung Story Instagram]\n1. Story → background hitam\n2. Ketik: "Kamu lebih takut mana?"\n3. Tambah stiker POLL\n4. A: "Gagal coba bisnis" B: "Kerja di tempat salah selamanya"\n5. Posting jam 20.00`},{id:5,day:5,platform:'instagram',format:'Reels · Teks',pilar:'cerita',emoji:'💪',title:'Saya buka usaha bukan karena berani — tapi karena terpaksa',preview:'"Modal nekat, daripada tidak makan." Cerita jujur yang relate.',desc:'Truth-bomb yang membuat audiens berhenti scroll.',time:'19.00–21.00',eng:'Very High',tip:'Tone jujur, tidak pamer. Cerita kelemahan yang jadi kekuatan.',caption:`Orang bilang saya berani buka usaha sendiri.\n\nPadahal mereka tidak tahu — saya buka usaha bukan karena berani. Tapi karena tidak ada pilihan lain.\n\nModal nekat, daripada tidak makan.\n\nTapi dari keterpaksaan itu saya belajar: peluang datang ke orang yang bergerak, bukan yang menunggu siap.\n\nKalau kamu sedang nunggu "siap" untuk mulai sesuatu — berhenti nunggu. Mulai dulu.`,hashtags:['#chondik','#memulaiusaha','#entrepreneurmuda','#modalnekat','#jangantunggu'],prompt:`Reels 9:16 #0F1923.\n"Saya buka usaha bukan karena berani."\nBaris kedua (oranye besar): "Tapi karena terpaksa."\nSub putih kecil: "Modal nekat. Daripada tidak makan."\n@chondik | #ModalNekat`,capcut:`Scene 1 (3 dtk): "Orang bilang saya berani buka usaha."\nScene 2 (2 dtk): "Mereka tidak tahu..."\nScene 3 (3 dtk): "Saya buka bukan karena berani."\nScene 4 (2 dtk): "Tapi karena terpaksa." — BESAR oranye\nScene 5 (2 dtk): "Modal nekat. Daripada tidak makan."\nScene 6 (3 dtk): "Peluang datang ke orang yang BERGERAK." — oranye\nScene 7: "@chondik"\nMusik: slow cinematic → hopeful.`},{id:6,day:6,platform:'facebook',format:'Post Panjang',pilar:'cerita',emoji:'📖',title:'Hasil poll kemarin + cerita singkat',preview:'Repost hasil poll dengan komentar jujur. Membangun koneksi personal.',desc:'Lanjutan poll. Bukti kamu dengerin respons audiens.',time:'12.00–14.00',eng:'High',tip:'Facebook suka post panjang berbasis cerita personal.',caption:`Kemarin saya tanya — kamu lebih takut gagal bisnis atau kerja selamanya di tempat yang salah?\n\nHasilnya mengejutkan saya.\n\nApapun jawabanmu — keduanya valid. Yang penting kamu sudah mulai jujur dengan diri sendiri.\n\nDan kejujuran itu adalah langkah pertama dari perubahan.\n\nSaya dulu juga pernah terjebak di karir yang terasa salah. Lama sekali. Sampai suatu titik saya sadar — saya tidak akan berubah kalau tidak memilih untuk berubah.\n\nKalau kamu sekarang di persimpangan — itu bukan tanda gagal. Itu tanda kamu sudah mulai sadar.`,hashtags:['#chondik','#selfawareness','#perubahan','#motivasiindonesia'],prompt:`Visual Facebook 1200x630px. Background #0F1923. Kiri: kutipan putih besar "Kejujuran adalah langkah pertama dari perubahan." Kanan: kotak oranye "Chondik | @chondik".`,capcut:`[Tidak perlu video]\nGunakan 1 gambar dari prompt ChatGPT sebagai foto post Facebook.`},{id:7,day:7,platform:'instagram',format:'Carousel · 5 Slide',pilar:'tips',emoji:'📚',title:'3 hal yang saya harap tahu di usia 20',preview:'Cover: "3 hal yang saya harap tahu di usia 20 — baru sadar di usia 38"',desc:'Carousel wisdom dari pengalaman nyata. Shareable untuk 18–30 tahun.',time:'11.00–13.00',eng:'Very High',tip:'Sebut usia spesifik di cover — langsung relate ke target audiens.',caption:`Saya baru benar-benar "menemukan jalan" di usia 38 tahun.\n\nBukan karena lambat belajar. Tapi karena tidak ada yang memberitahu saya hal-hal ini waktu muda.\n\nSekarang saya beritahu kamu — gratis.\n\nSwipe dan baca sampai habis. Simpan sebelum kamu lupa.`,hashtags:['#chondik','#lessonlearned','#anakmudasukses','#belajardaripengalaman','#nasihatuntukdiri'],prompt:`5 slide carousel 1080x1080px. Background #0F1923.\nSlide 1: "3 Hal Yang Saya Harap Tahu di Usia 20" + "Baru sadar di usia 38"\nSlide 2: "01 — Pilih lingkungan, bukan sekadar teman"\nSlide 3: "02 — Skill lebih penting dari ijazah"\nSlide 4: "03 — Mulai usaha kecil dari sekarang"\nSlide 5: "Kamu masih punya waktu." + @chondik`,capcut:`Scene 1: "3 hal yang harap tahu di usia 20..."\nScene 2-4: tiap hal 3 detik dengan nomor oranye\nScene 5: "Baru sadar di usia 38."\nScene 6: "Kamu masih punya waktu." (oranye)\nScene 7: "@chondik"\nMusik: lo-fi reflektif.`},{id:8,day:8,platform:'instagram',format:'Story · Question Box',pilar:'engage',emoji:'❓',title:'Story: Ceritakan satu hal yang kamu sesali dari usia muda',preview:'Question box: "Satu hal yang kamu sesali — apa?"',desc:'Pancingan interaksi mendalam. Jawaban jadi konten hari 14.',time:'07.00–09.00',eng:'High',tip:'Jawab 3–5 respons terbaik esok hari.',caption:`[Teks Story Instagram]\n\nSatu hal yang kamu sesali dari usia mudamu — apa?\n\nCeritakan ke saya 👇\nSaya baca semua.`,hashtags:['#chondik','#refleksi'],prompt:`Story 9:16. Background #0F1923. Center:\nTeks putih besar: "Satu hal yang paling kamu sesali dari usia muda?"\nSub abu: "Saya baca semua jawaban"\nSpace untuk stiker Question.\n@chondik`,capcut:`[Gunakan langsung Story Instagram]\n1. Story → background hitam\n2. Ketik teks pertanyaan\n3. Tambah stiker Question Box\n4. Posting jam 07.00 pagi`},{id:9,day:9,platform:'instagram',format:'Carousel · Storytelling',pilar:'cerita',emoji:'🌑',title:'Yang saya rasakan waktu tidak punya penghasilan di usia 30',preview:'Cerita gelap yang honest. Titik terpuruk yang jadi titik balik.',desc:'Konten vulnerability. Membangun koneksi paling dalam.',time:'19.00–21.00',eng:'Very High',tip:'Semakin jujur semakin kuat. Akhiri dengan harapan.',caption:`Ini cerita yang jarang saya ceritakan.\n\nDi usia 30, tidak punya gaji tetap. Susah cari kerja. Teman-teman sudah punya karir, saya masih cari arah.\n\nRasanya? Malu. Lelah. Bingung harus mulai dari mana.\n\nTapi dari titik paling gelap itu: ketidaknyamanan adalah tanda bahwa sesuatu harus berubah.\n\nKeputusan saya: berhenti nunggu, mulai ciptakan sendiri.\n\nKamu sekarang di titik mana? Tulis di komentar.`,hashtags:['#chondik','#bangkitdarititikrendah','#motivasinyata','#ceritajujur','#tidakmenyerah'],prompt:`Carousel 5 slide 1080x1080px. Background #0F1923.\nSlide 1: "Di usia 30, tidak punya penghasilan." + "Ini yang saya pelajari."\nSlide 2: "Malu." "Lelah." "Bingung." (tiga kata ukuran berbeda)\nSlide 3: Quote oranye — "Ketidaknyamanan = tanda harus berubah."\nSlide 4: "Berhenti nunggu. Mulai ciptakan sendiri."\nSlide 5: "Tidak pernah jatuh? Tidak." + "Tidak berhenti bangun? Benar." + @chondik`,capcut:`Scene 1 (3 dtk): "Di usia 30..." (kecil fade in)\nScene 2 (2 dtk): "Tidak punya penghasilan tetap."\nScene 3 (2 dtk): [layar gelap, diam]\nScene 4 (4 dtk): "Ketidaknyamanan = tanda harus berubah." (oranye bold)\nScene 5 (3 dtk): "Sekarang saya punya bisnis sendiri."\nScene 6 (3 dtk): "Bukan karena tidak pernah jatuh." + "Tapi karena tidak berhenti bangun."\nScene 7: "@chondik"\nMusik: Piano slow → hopeful.`},{id:10,day:10,platform:'instagram',format:'Reels · Data Visual',pilar:'waktu',emoji:'⏳',title:'Kamu scroll berapa jam hari ini?',preview:'"3 jam/hari × 365 = 45 hari penuh setahun." Data sederhana yang mengejutkan.',desc:'Konten berbasis data. Membuat audiens berpikir ulang kebiasaan.',time:'19.00–21.00',eng:'Very High',tip:'Mulai dengan pertanyaan. Data sederhana tapi mengejutkan.',caption:`Coba buka Screen Time di HP kamu.\n\n3 jam sehari × 365 hari = 1.095 jam setahun.\n\nItu setara 45 hari penuh. Setiap tahun.\n\nBayangkan kalau setengahnya kamu pakai belajar skill baru atau bangun usaha kecil.\n\nHidup kamu bisa sangat berbeda dalam 1 tahun.\n\nPilihan ada di tangan kamu.`,hashtags:['#chondik','#managewaktu','#produktivitasmuda','#screentimecheck'],prompt:`Reels 9:16 infografis. Background #0F1923.\n"Scroll 3 jam/hari"\n"× 365 hari"\n"= 1.095 jam" (putih besar)\n"= 45 HARI PENUH" (oranye BESAR)\n"Kamu mau pakai untuk apa?" + @chondik`,capcut:`Scene 1 (2 dtk): "Kamu scroll berapa jam hari ini?"\nScene 2 (2 dtk): "3 jam sehari..."\nScene 3 (1 dtk): "× 365 hari..."\nScene 4 (2 dtk): "= 1.095 JAM" (oranye scale up)\nScene 5 (2 dtk): "= 45 hari penuh."\nScene 6 (3 dtk): "Bayangkan kalau setengahnya untuk belajar..."\nScene 7 (2 dtk): "Pilihan ada di kamu." (oranye)\nScene 8: "@chondik"\nMusik: minimal tension.`},{id:11,day:11,platform:'instagram',format:'Reels · Tips',pilar:'tips',emoji:'🔑',title:'Mencari kerja susah? 3 hal ini yang harus kamu lakukan',preview:'Tips konkret untuk anak muda yang kesulitan mencari kerja.',desc:'Konten solusi untuk masalah nyata audiens 18–30 tahun.',time:'19.00–21.00',eng:'High',tip:'Acknowledge masalah dulu, baru berikan 3 langkah konkret.',caption:`Mencari kerja makin susah. Bukan rahasia lagi.\n\nTapi kebanyakan pelamar bersaing dengan CV yang isinya sama semua.\n\nIni yang harus kamu lakukan:\n1. Bangun satu skill spesifik yang dibutuhkan pasar\n2. Dokumentasikan prosesnya di media sosial\n3. Biarkan portofoliomu berbicara sebelum CV-mu dibaca\n\nSaya dulu tidak punya gelar bergengsi. Tapi punya pengalaman nyata yang bisa ditunjukkan.\n\nKamu bisa mulai hari ini. Tidak perlu nunggu lulus.`,hashtags:['#chondik','#mencarikerja','#kariranakm uda','#skilldigital','#freshgraduate'],prompt:`Reels 9:16 #0F1923. List:\n"Susah Cari Kerja?" (merah terang)\n"Lakukan 3 hal ini:"\n"01 — Bangun 1 skill spesifik" (oranye)\n"02 — Dokumentasikan di medsos"\n"03 — Buat portofolio nyata"\n"CV bagus kalah sama portofolio nyata." + @chondik`,capcut:`Scene 1: "Susah cari kerja?" (besar putih)\nScene 2: "Semua CV isinya sama."\nScene 3: "Jadi berbeda dengan ini:"\nScene 4: "01 — Bangun 1 skill spesifik." (oranye)\nScene 5: "02 — Dokumentasikan di medsos."\nScene 6: "03 — Portofolio berbicara duluan."\nScene 7: "Bukan gelar yang buka pintu."\nScene 8: "Pengalaman nyata yang buka pintu." (oranye)\nScene 9: "@chondik"\nDurasi: ~22 dtk.`},{id:12,day:12,platform:'instagram',format:'Carousel · 6 Slide',pilar:'tips',emoji:'📊',title:'Bedanya orang yang maju vs yang stagnan',preview:'Perbandingan kebiasaan harian. Format VS yang selalu menarik.',desc:'Carousel perbandingan yang sangat shareable.',time:'11.00–13.00',eng:'High',tip:'Format VS selalu menarik. Jujur dan tidak menghakimi di closing.',caption:`Saya sudah kenal banyak orang — yang tidak punya apa-apa sampai yang berhasil punya bisnis sendiri.\n\nPerbedaannya jarang soal kecerdasan atau bakat.\n\nPerbedaannya selalu soal kebiasaan sehari-hari.\n\nSwipe — dan jujur kamu ada di sisi yang mana.\n\nSimpan sebagai reminder.`,hashtags:['#chondik','#kebiasaansukses','#mindsetgrowth','#habittracker','#anakmudasukses'],prompt:`6 slide carousel 1080x1080px dark.\nCover: "Bukan Soal Bakat. Soal Kebiasaan."\nSlide 2–6: Format VS dua kolom:\nKiri (merah): kebiasaan buruk\nKanan (hijau): kebiasaan baik\nContoh: "Scroll tanpa tujuan" vs "Belajar 30 menit"\n"Nunggu momen tepat" vs "Mulai meski belum siap"`,capcut:`Scene 1: "Bukan soal bakat." (oranye)\nScene 2: "Soal kebiasaan sehari-hari."\nScene 3: "Stagnan:" (merah) → "Scroll tanpa tujuan"\nScene 4: "Maju:" (hijau) → "Belajar 30 menit tiap hari"\nScene 5: "Stagnan:" → "Nunggu momen sempurna"\nScene 6: "Maju:" → "Mulai meski belum siap"\nScene 7: "Kamu ada di sisi yang mana?" (oranye)\nScene 8: "@chondik"\nMusik: focused lo-fi.`},{id:13,day:13,platform:'facebook',format:'Post Panjang',pilar:'cerita',emoji:'🏢',title:'Bagaimana saya dapat klien pertama Markbro tanpa iklan',preview:'Strategi bisnis nyata: klien pertama dari word of mouth.',desc:'Authority building + pelajaran bisnis yang applicable.',time:'12.00–14.00',eng:'High',tip:'Cerita bisnis nyata sangat disukai di Facebook.',caption:`Klien pertama Markbro datang dari word of mouth. Tanpa iklan.\n\nCaranya? Sederhana tapi jarang dilakukan:\n\nSaya tidak tunggu klien datang. Saya datangi mereka — dengan solusi untuk masalah yang sudah saya identifikasi.\n\nBanyak rumah sakit kecil punya website mati dan medsos tidak terkelola. Saya datang bawa proposal. Tunjukkan masalahnya. Tawarkan solusinya.\n\nItu saja.\n\nBisnis tidak selalu butuh modal besar. Kadang cukup keberanian mengetuk pintu yang belum pernah diketuk orang.\n\nKamu punya masalah apa di sekitarmu? Itu mungkin bisnis kamu yang belum lahir.`,hashtags:['#chondik','#strategibisnis','#markbro','#wordofmouth','#bisnistanpamodal'],prompt:`Visual Facebook 1200x630px. Background #0F1923. Kiri: "Klien pertama tanpa iklan." + "3 langkah:" + list. Kanan: highlight oranye "@chondik | @markbro.id".`,capcut:`Scene 1: "Klien pertama Markbro tanpa iklan."\nScene 2-4: 3 langkah muncul bertahap\nScene 5: "Bisnis terbaik lahir dari masalah yang kamu pahami paling dalam." (oranye)\nScene 6: "@chondik | @markbro.id"`},{id:14,day:14,platform:'instagram',format:'Carousel · Refleksi',pilar:'engage',emoji:'💬',title:'Jawaban terbaik question box + refleksi bersama',preview:'Share jawaban follower dari hari ke-8. Membangun community feeling.',desc:'UGC yang memperlihatkan kamu benar-benar dengerin audiens.',time:'19.00–21.00',eng:'High',tip:'Pilih 2–3 jawaban paling relate. Berikan respons yang thoughtful.',caption:`Beberapa hari lalu saya tanya — apa yang paling kamu sesali dari usia muda?\n\nJawabannya membuat saya terharu.\n\nBanyak dari kita menyesali hal yang sama: terlalu lama menunggu, terlalu banyak takut, terlalu sedikit bergerak.\n\nWaktu terbaik memulai memang dulu. Tapi waktu terbaik kedua adalah sekarang.\n\nApa yang akan kamu mulai hari ini?`,hashtags:['#chondik','#refleksidiri','#tumbuhbersama','#mulaisekarang'],prompt:`Carousel 4 slide 1080x1080px. Background #0F1923.\nSlide 1: "Banyak dari kita menyesali hal yang sama."\nSlide 2: Quote oranye — "Terlalu lama menunggu."\nSlide 3: Quote — "Terlalu banyak takut."\nSlide 4: "Waktu terbaik kedua adalah sekarang." + @chondik`,capcut:`Scene 1: "Banyak yang menyesali hal yang sama:"\nScene 2: "Terlalu lama menunggu." (oranye)\nScene 3: "Terlalu banyak takut."\nScene 4: "Terlalu sedikit bergerak."\nScene 5: "Waktu terbaik kedua adalah sekarang." (BESAR oranye)\nScene 6: "@chondik — mulai hari ini"\nMusik: piano reflektif → hopeful.`},{id:15,day:15,platform:'facebook',format:'Post Panjang',pilar:'tips',emoji:'💼',title:'Kenapa karyawan harus mulai punya income sampingan sekarang',preview:'Edukasi finansial untuk karyawan. Bukan nakut-nakutin.',desc:'Post Facebook untuk audiens karyawan 25–40 tahun.',time:'12.00–14.00',eng:'High',tip:'Paragraf pendek, banyak jeda. Lebih mudah dibaca di mobile.',caption:`Saya pernah jadi karyawan. Saya tahu rasanya bergantung pada satu sumber penghasilan.\n\nIni fakta:\n• PHK bisa datang kapan saja\n• Inflasi terus naik\n• Gaji tidak selalu naik secepat kebutuhan\n\nSolusinya bukan resign besok. Tapi mulai bangun income sampingan sekarang:\n\n1. Jual skill yang sudah kamu punya\n2. Jual produk digital (ebook, template)\n3. Kelola medsos bisnis kecil di sekitarmu\n4. Ikut program afiliasi\n\nMulai dari Rp 500 ribu per bulan pun sudah melatih mental pengusaha.\n\nYang penting: mulai sekarang.`,hashtags:['#chondik','#incomesampingan','#karyawancerdas','#sidehustle','#financialplanning'],prompt:`Visual Facebook 1200x630px. Background #0F1923. "Jangan bergantung pada 1 sumber penghasilan." + 4 opsi income. Kanan: badge oranye "Mulai Sekarang — @chondik".`,capcut:`Scene 1: "Satu sumber penghasilan itu rentan."\nScene 2: "PHK bisa datang kapan saja." (merah)\nScene 3: "Mulai bangun income sampingan sekarang." (oranye)\nScene 4-7: 4 opsi muncul bertahap\nScene 8: "Mulai dari Rp 500 ribu per bulan." (oranye)\nScene 9: "@chondik"`},{id:16,day:16,platform:'instagram',format:'Reels · Teks',pilar:'cerita',emoji:'🎯',title:'Saya pernah jadi sales MLM — ini yang saya pelajari',preview:'Cerita jujur MLM dan sales. Tidak malu tapi ambil pelajarannya.',desc:'Vulnerability + lesson learned. Membangun trust.',time:'19.00–21.00',eng:'High',tip:'Kejujuran ini yang membangun trust paling kuat.',caption:`Saya pernah ikut MLM. Sales asuransi. Jualan KTA.\n\nDan saya tidak malu ceritakan itu.\n\nKarena dari semua itu, saya belajar satu skill yang jadi fondasi bisnis saya:\n\nCara meyakinkan orang.\n\nBukan manipulasi. Tapi memahami apa yang orang butuhkan dan menunjukkan bahwa kamu bisa membantu.\n\nTidak ada pengalaman yang sia-sia — kalau kamu mau belajar dari setiap prosesnya.`,hashtags:['#chondik','#lessonlearned','#perjalanankarir','#tidakadayangsiasiaa','#belajardarigagal'],prompt:`Reels 9:16 #0F1923.\n"Saya pernah ikut MLM."\n"Sales asuransi. Jualan KTA."\nOranye: "Dan tidak ada yang sia-sia."\nSub: "Setiap fase mengajarkan 1 skill berharga."\n@chondik`,capcut:`Scene 1: "Saya pernah ikut MLM."\nScene 2: "Sales asuransi. Jualan KTA."\nScene 3: "Saya tidak malu ceritakan itu."\nScene 4: "Dari sana saya belajar:"\nScene 5: "Cara meyakinkan orang." (BESAR oranye)\nScene 6: "Tidak ada pengalaman yang sia-sia." (oranye)\nScene 7: "@chondik"\nMusik: reflektif lo-fi.`},{id:17,day:17,platform:'youtube',format:'YouTube Shorts',pilar:'tips',emoji:'▶️',title:'3 skill paling dicari tahun ini — belajarnya gratis',preview:'Konten edukasi padat untuk YouTube Shorts. Hook kuat 3 detik pertama.',desc:'YouTube Shorts untuk jangkauan lebih luas.',time:'Selasa–Kamis 15.00–18.00',eng:'High',tip:'Hook wajib di 3 detik pertama. Ending ada CTA subscribe.',caption:`Tidak punya uang untuk kursus mahal? Tidak masalah.\n\nHampir semua skill bisa dipelajari gratis — kalau kamu tahu di mana carinya.\n\nYang membedakan bukan akses ke informasi.\n\nYang membedakan: siapa yang mau duduk dan belajar — dan siapa yang lebih pilih scroll.\n\nSubscribe untuk konten seperti ini setiap minggu.`,hashtags:['#chondik','#belajargratis','#upgradeskill','#anakmudasukses','#skilldigital','#youtubeshorts'],prompt:`Thumbnail YouTube Shorts 9:16.\n"3 SKILL YANG DICARI TAHUN INI" (putih bold)\n3 kotak oranye:\n"01 — Digital Marketing"\n"02 — Content Creation"\n"03 — AI Prompting"\n"bisa belajar gratis" (abu kecil)\n@chondik`,capcut:`Scene 1 (2 dtk): HOOK — "3 skill dicari sekarang..." (oranye)\nScene 2 (2 dtk): "...semuanya bisa dipelajari GRATIS."\nScene 3 (3 dtk): "01 — Digital Marketing"\nScene 4 (3 dtk): "02 — Content Creation"\nScene 5 (3 dtk): "03 — AI Prompting"\nScene 6 (3 dtk): "Yang membedakan: siapa yang MAU belajar." (oranye)\nScene 7 (2 dtk): "Subscribe @chondik"\nTotal: ~18 dtk.`},{id:18,day:18,platform:'instagram',format:'Story · Poll',pilar:'engage',emoji:'💬',title:'Poll: Kamu sekarang karyawan atau pengusaha?',preview:'Segmentasi audiens: Karyawan vs Punya Usaha Sendiri.',desc:'Data untuk pahami siapa mayoritas audiens.',time:'20.00–22.00',eng:'High',tip:'Follow up: "DM saya setelah vote — yuk ngobrol."',caption:`[Teks Story]\n\nKamu sekarang:\nA. Karyawan 💼\nB. Punya usaha sendiri 🚀\n\nDM saya setelah vote.`,hashtags:['#chondik','#karyawanvsusaha'],prompt:`Story 9:16. Background #0F1923.\n"Kamu sekarang?" (putih sedang)\nSpace untuk poll.\nSub: "DM saya setelah vote"\n@chondik`,capcut:`[Story Instagram langsung]\n1. Story → background hitam\n2. Ketik pertanyaan\n3. Tambah stiker Poll\n4. Posting jam 20.00`},{id:19,day:19,platform:'instagram',format:'Reels · Teks',pilar:'cerita',emoji:'🏥',title:'Cara saya dapat klien pertama Markbro tanpa iklan',preview:'Strategi bisnis nyata dari pengalaman langsung.',desc:'Authority building. Keahlian marketing nyata Chondik.',time:'19.00–21.00',eng:'High',tip:'Cerita konkret dengan langkah yang bisa ditiru.',caption:`Markbro lahir dari masalah yang saya lihat sendiri.\n\nBanyak klinik punya layanan bagus — tapi tidak ada yang tahu.\n\nSaya yang pernah jadi Wadir Pemasaran RS tahu masalah itu. Jadi saya jadi solusinya.\n\nKlien pertama bukan dari iklan. Tapi dari saya yang aktif datangi mereka.\n\nBisnis terbaik lahir dari masalah yang kamu pahami paling dalam.\n\nKamu punya masalah seperti itu di sekitarmu?`,hashtags:['#chondik','#markbro','#digitalmarketing','#bisnishealthcare','#klienpertama'],prompt:`Reels 9:16 #0F1923. Timeline:\n"Masalah:" → "RS kecil tidak ada marketing"\n↓\n"Solusi:" → "MARKBRO"\n↓\n"Hasilnya:" → "Klien dari word of mouth"\n"Bisnis terbaik lahir dari masalah yang dipahami dalam." + @chondik`,capcut:`Scene 1: "Markbro lahir dari masalah nyata."\nScene 2: "Banyak klinik tidak ada marketing."\nScene 3: "Saya tahu masalah itu dari dalam."\nScene 4: "Jadi saya jadi solusinya."\nScene 5: "Klien pertama bukan dari iklan." (oranye)\nScene 6: "Bisnis terbaik lahir dari masalah yang dipahami paling dalam."\nScene 7: "@chondik | @markbro.id"`},{id:20,day:20,platform:'instagram',format:'Carousel · Surat',pilar:'cerita',emoji:'💌',title:'Surat untuk anak saya yang 18 tahun',preview:'Surat personal dari ayah ke anak 18 tahun dan semua pemirsa.',desc:'Konten emosional tertinggi. Banyak yang share.',time:'19.00–21.00',eng:'Very High',tip:'Tulis dari hati. Semakin personal semakin kuat.',caption:`Ini konten paling personal yang pernah saya buat.\n\nSaya punya anak yang sekarang 18 tahun. Di usia yang saya dulu banyak membuat keputusan yang ingin saya lakukan berbeda.\n\nSaya tulis surat ini untuknya. Dan untuk kamu yang sebaya dengannya.\n\nBukan untuk menggurui. Tapi karena saya tidak ingin kalian terlambat seperti saya.\n\nSwipe dan baca sampai habis.`,hashtags:['#chondik','#suratuntukanak','#untukkamu18tahun','#pesanayah','#janganterlambat'],prompt:`Carousel 6 slide 1080x1080px. Tema hangat personal.\nSlide 1: "Surat untuk Anak Saya yang 18 Tahun" + "Dan untuk kamu yang sebaya."\nSlide 2-5: satu pesan per slide, font humanis\nSlide 6: "Kamu masih punya waktu." (oranye) + @chondik`,capcut:`Scene 1 (3 dtk): "Surat untuk anakku yang 18 tahun."\nScene 2-7: satu pesan per scene, pace lambat\nScene 8 (5 dtk): "Kamu masih punya waktu." (BESAR oranye)\nScene 9 (3 dtk): "— Dari seorang ayah yang belajar terlambat." (italic abu)\nScene 10: "@chondik"\nMusik: piano emosional, no beat.`},{id:21,day:21,platform:'instagram',format:'Single Image + Caption',pilar:'promo',emoji:'📘',title:'Soft promo — Ebook Jangan Terlambat Seperti Saya',preview:'Promosi ebook pertama setelah 3 minggu membangun trust.',desc:'Promo natural setelah audiens sudah kenal Chondik.',time:'19.00–21.00',eng:'Medium-High',tip:'Trust sudah terbangun 20 hari. Ini momen yang tepat.',caption:`Sudah 3 minggu saya berbagi cerita di sini.\n\nDan satu pertanyaan yang sering masuk: "Pak Chondik, lebih lengkapnya ada di mana?"\n\nJawabannya: ebook "Jangan Terlambat Seperti Saya."\n\nIsinya bukan teori. Isinya perjalanan nyata saya dari titik paling gelap.\n\nKalau kamu 18–30 dan sedang cari arah — ini untuk kamu.\n\nHarga: Rp 49.000. Link di bio atau DM kata "EBOOK".`,hashtags:['#chondik','#ebookindonesia','#janganterlambat','#pengembangandiri','#ebookmurah'],prompt:`Post 1080x1080px. Background #0F1923.\nAtas: Mockup cover ebook "Jangan Terlambat Seperti Saya"\nBawah: "Rp 49.000" (badge oranye) + "DM kata EBOOK" + @chondik`,capcut:`Scene 1: "3 minggu saya berbagi cerita."\nScene 2: '"Lebih lengkapnya ada di mana?"'\nScene 3: "Jawabannya ada di ebook saya."\nScene 4: "Jangan Terlambat Seperti Saya" (BESAR oranye)\nScene 5: "Rp 49.000" (bold putih)\nScene 6: "DM kata EBOOK" (oranye)\nScene 7: "@chondik"`},{id:22,day:22,platform:'instagram',format:'Reels + Caption',pilar:'cerita',emoji:'🏆',title:'Dari staf ke Wadir Rumah Sakit — pelajaran karir saya',preview:'Cerita karir yang membuktikan kredensial nyata Chondik.',desc:'Authority building dengan cerita karir konkret.',time:'19.00–21.00',eng:'High',tip:'Ceritakan fakta dengan rendah hati. Bukan pamer.',caption:`Saya mulai karir sebagai staf pemasaran rumah sakit di usia 32 tahun.\n\nBanyak yang bilang terlambat. Saya tidak peduli.\n\nSaya tidak hanya kerjakan tugas — saya pahami masalah yang lebih besar dan tawarkan solusinya.\n\nBeberapa tahun kemudian: Wakil Direktur Pemasaran.\n\nBukan karena paling pintar. Tapi karena paling mau belajar dan ambil tanggung jawab yang orang lain hindari.\n\nDi tempat kerjamu sekarang — masalah apa yang belum ada yang mau selesaikan? Itu peluangmu.`,hashtags:['#chondik','#naikkarir','#mindsetkaryawan','#ambiltanggungjawab','#karirsukses'],prompt:`Reels 9:16 #0F1923. Timeline:\n"Usia 32" → "Staf Pemasaran RS"\n↓ (panah oranye)\n"Wakil Direktur"\n"Bukan karena paling pintar."\n"Tapi karena paling mau belajar." (oranye bold)\n@chondik`,capcut:`Scene 1: "Usia 32. Mulai sebagai staf."\nScene 2: "Banyak yang bilang terlambat."\nScene 3: "Saya tidak peduli."\nScene 4: "Beberapa tahun kemudian:"\nScene 5: "Wakil Direktur Pemasaran." (oranye)\nScene 6: "Bukan karena paling pintar."\nScene 7: "Tapi karena paling mau belajar." (oranye)\nScene 8: "@chondik"`},{id:23,day:23,platform:'instagram',format:'Reels · Filosofi',pilar:'waktu',emoji:'🔄',title:'Kenapa saya tidak menyesal dengan semua kesalahan karir',preview:'"Semua salah, tapi saling terkait." Filosofi yang hanya datang dari yang benar-benar melewatinya.',desc:'Wisdom mendalam yang mengubah cara pandang tentang kesalahan.',time:'19.00–21.00',eng:'Very High',tip:'Konten yang banyak di-save dan di-share.',caption:`Orang sering tanya — kalau bisa diulang, apa yang mau kamu ubah?\n\nJawaban saya: tidak ada.\n\nBukan karena tidak membuat kesalahan. Tapi karena setiap kesalahan membawa saya ke titik berikutnya.\n\nPengamen → sales → karyawan → wadir → founder. Terlihat tidak ada benang merahnya. Tapi setiap fase mengajarkan sesuatu yang saya butuhkan di fase berikutnya.\n\nKalau kamu sekarang merasa salah jalan — mungkin kamu sedang di fase yang perlu dilalui, bukan dihindari.`,hashtags:['#chondik','#growthmindset','#perjalananhidup','#tidakmenyesal','#belajardarimasa lalu'],prompt:`Reels 9:16 #0F1923. Path visual:\nTitik-titik oranye: "Pengamen" → "Sales" → "Karyawan" → "Wadir" → "Founder"\nAtas: "Terlihat tidak ada benang merahnya."\nBawah (oranye bold): "Tapi semuanya saling terkait."\n@chondik`,capcut:`Scene 1: "Kalau bisa diulang, apa yang mau diubah?"\nScene 2: "Jawaban saya: tidak ada." (BESAR oranye)\nScene 3: "Pengamen → Sales → Karyawan → Wadir → Founder"\nScene 4: "Setiap fase mengajarkan yang saya butuhkan." (oranye)\nScene 5: "Kalau kamu merasa salah jalan —"\nScene 6: "mungkin kamu sedang di fase yang harus dilalui."\nScene 7: "@chondik"\nMusik: reflektif lo-fi.`},{id:24,day:24,platform:'instagram',format:'Carousel · 7 Slide',pilar:'tips',emoji:'🎯',title:'5 pertanyaan yang harus kamu jawab sebelum usia 25',preview:'5 pertanyaan deep yang menentukan arah 10 tahun ke depan.',desc:'Konten introspektif yang mendorong audiens berpikir dan bertindak.',time:'11.00–13.00',eng:'Very High',tip:'Pertanyaan dengan usia spesifik selalu dapat engagement tinggi.',caption:`Saya tidak pernah ditanya pertanyaan ini waktu muda. Dan saya yakin hidup akan berbeda kalau menjawabnya lebih awal.\n\nSekarang saya tanya kamu — 5 pertanyaan yang menentukan arah 10 tahun ke depanmu.\n\nJawab jujur. Simpan carousel ini. Mulai ambil langkah dari jawaban yang kamu temukan.`,hashtags:['#chondik','#selfawareness','#5pertanyaan','#sebelumusia25','#introspeksi'],prompt:`7 slide carousel 1080x1080px dark premium.\nCover: "5 Pertanyaan Yang Harus Kamu Jawab Sebelum Usia 25"\nSlide 2-6: satu pertanyaan per slide dengan nomor oranye\nSlide 7: "Jawaban ini = peta hidupmu." + @chondik`,capcut:`Scene 1: "5 pertanyaan untuk tentukan 10 tahun ke depanmu."\nScene 2: "Jawab jujur."\nScene 3-7: tiap pertanyaan 3-4 detik\nScene 8: "Jawaban ini = peta hidupmu." (oranye bold)\nScene 9: "@chondik — simpan dan jawab"\nMusik: thoughtful piano.`},{id:25,day:25,platform:'instagram',format:'Story · Q&A',pilar:'engage',emoji:'🙋',title:'Story: Tanya saya apapun soal bisnis atau karir',preview:'Question box terbuka: "Tanya apapun soal bisnis, karir, atau hidup."',desc:'Open Q&A yang memberikan ide konten untuk hari ke-26.',time:'07.00–09.00',eng:'High',tip:'Jawab 3–5 pertanyaan terbaik esok hari.',caption:`[Teks Story]\n\nTanya saya apapun soal bisnis, karir, atau hidup.\n\nSaya jawab sejujurnya 👇`,hashtags:['#chondik','#QandA','#tanyachondik'],prompt:`Story 9:16 #0F1923.\nTeks besar: "Tanya saya apapun."\nSub: "Soal bisnis, karir, atau hidup."\nSpace untuk Question stiker.\n@chondik`,capcut:`[Story Instagram langsung]\n1. Background hitam\n2. Teks: "Tanya saya apapun soal bisnis atau karir"\n3. Tambah stiker Question\n4. Posting jam 07.00 pagi`},{id:26,day:26,platform:'instagram',format:'Carousel · Q&A',pilar:'engage',emoji:'💬',title:'Jawab pertanyaan follower — Q&A sesi 1',preview:'Jawaban dari 3–5 pertanyaan terbaik follower.',desc:'UGC yang menunjukkan kamu benar-benar dengerin audiens.',time:'19.00–21.00',eng:'High',tip:'Pilih pertanyaan paling banyak relate ke mayoritas audiens.',caption:`Kemarin banyak pertanyaan masuk. Saya jawab yang paling banyak ditanyakan.\n\nSaya bukan konsultan berbayar mahal — cuma orang yang sudah melewati banyak hal dan ingin berbagi.\n\nKalau pertanyaanmu belum terjawab — DM saya langsung. Saya baca semua.`,hashtags:['#chondik','#QandA','#tanyachondik','#jawabpertanyaan'],prompt:`Carousel Q&A 1080x1080px.\nCover: "Q&A — Chondik Jawab" + @chondik\nSlide 2-5: Format tanya-jawab\nKotak abu: "Q: [pertanyaan]"\nKotak oranye: "A: [jawaban]"\nSlide terakhir: "Masih ada pertanyaan? DM saya." + @chondik`,capcut:`Scene 1: "Banyak pertanyaan masuk."\nScene 2: "Ini jawaban saya:"\nScene 3-6: tiap Q&A 4 detik\nScene akhir: "Pertanyaanmu belum terjawab? DM saya." + @chondik`},{id:27,day:27,platform:'instagram',format:'Reels · Brand',pilar:'promo',emoji:'🏢',title:'Apa itu Markbro dan kenapa saya bangunnya',preview:'Brand story Markbro yang natural. Bukan iklan tapi cerita.',desc:'Soft promo yang dibungkus wisdom bisnis.',time:'19.00–21.00',eng:'Medium-High',tip:'Cerita dulu, baru sebut brand.',caption:`Markbro lahir dari masalah yang saya lihat sendiri.\n\nBanyak klinik punya layanan bagus — tapi tidak ada yang tahu.\n\nSaya yang pernah jadi Wadir RS tahu masalah itu. Jadi saya jadi solusinya.\n\nSekarang Markbro sudah bantu puluhan klinik membangun kehadiran digital.\n\nBisnis terbaik lahir dari masalah yang kamu pahami lebih dalam dari siapapun.`,hashtags:['#chondik','#markbro','#digitalmarketing','#bisnishealthcare','#idebisnis'],prompt:`Reels 9:16 #0F1923.\n"Masalah:" → "RS kecil tidak ada marketing"\n↓\n"Solusi yang dibangun:" → "MARKBRO" (BESAR oranye)\n"Bisnis terbaik lahir dari masalah yang dipahami dalam."\n@chondik | @markbro.id`,capcut:`Scene 1: "Markbro lahir dari masalah nyata."\nScene 2-3: identifikasi masalah\nScene 4: "MARKBRO" (BESAR oranye)\nScene 5: "Bisnis terbaik lahir dari masalah yang dipahami paling dalam." (oranye)\nScene 6: "@chondik | @markbro.id"`},{id:28,day:28,platform:'facebook',format:'Post Refleksi',pilar:'cerita',emoji:'🙏',title:'Refleksi bulan pertama — terima kasih sudah di sini',preview:'Apresiasi tulus setelah 4 minggu konsisten.',desc:'Konten hubungan yang membangun loyalitas.',time:'12.00–14.00',eng:'High',tip:'Tulus dan tidak berlebihan. Audiens merasakan mana yang asli.',caption:`Sebulan lalu saya mulai serius berbagi di sini.\n\nBukan karena merasa lebih pintar. Tapi karena pengalaman 20 tahun ini tidak boleh tersimpan di kepala sendiri.\n\nKalau satu cerita membuat satu orang bergerak lebih awal dari yang saya lakukan — itu sudah cukup.\n\nTerima kasih sudah baca, like, dan komentar. Itu berarti banyak untuk saya.\n\nBulan depan masih banyak cerita. Ikuti terus.`,hashtags:['#chondik','#terimakasih','#1bulan','#gratitude','#konsisten'],prompt:`Post Facebook. Background gelap. Center: "Terima kasih sudah 1 bulan bersama saya." Sub: "Masih banyak cerita." @chondik | Bulan 1 ✓`,capcut:`Scene 1: "1 bulan." (oranye besar)\nScene 2: "Terima kasih sudah di sini."\nScene 3: "Kalau 1 cerita membuat 1 orang bergerak lebih awal —"\nScene 4: "itu sudah cukup." (oranye)\nScene 5: "@chondik — tetap ikuti"`},{id:29,day:29,platform:'instagram',format:'Reels · Closing',pilar:'cerita',emoji:'🌟',title:'Satu keputusan yang mengubah hidup saya selamanya',preview:'Keputusan untuk tidak berhenti di momen paling tidak pasti.',desc:'Konten inspirasional kuat. Banyak di-save.',time:'19.00–21.00',eng:'Very High',tip:'Pace lambat dan emosional. Konten ini akan di-save ribuan kali.',caption:`Ada satu keputusan yang paling membentuk hidup saya.\n\nBukan keputusan besar yang terlihat dramatis. Tapi keputusan kecil di momen paling tidak pasti.\n\nKeputusan untuk tidak berhenti.\n\nWaktu semua orang sudah menemukan jalannya — saya masih di persimpangan. Dan saya pilih untuk tetap jalan, meski tidak tahu persis ke mana.\n\nTernyata itu keputusan terbaik yang pernah saya buat.\n\nKamu di persimpangan mana? Jangan berhenti. Terus jalan.`,hashtags:['#chondik','#keputusanhidup','#tidakberhenti','#terusjalan','#janganterlambat'],prompt:`Reels 9:16 #0F1923. Tipografi emosional:\n"Keputusan untuk tidak berhenti." (putih sedang)\n"TIDAK BERHENTI." (BESAR oranye)\nSub abu: "Di momen paling tidak pasti sekalipun."\n@chondik | "Terus jalan."`,capcut:`Scene 1 (3 dtk): "Ada satu keputusan yang mengubah hidup saya."\nScene 2 (3 dtk): "Keputusan untuk tidak berhenti."\nScene 3 (3 dtk): "Waktu semua orang sudah menemukan jalannya —"\nScene 4 (3 dtk): "saya masih di persimpangan."\nScene 5 (4 dtk): "Tapi saya pilih untuk tetap jalan." (ORANYE BESAR)\nScene 6 (4 dtk): "Ternyata itu keputusan terbaik."\nScene 7 (3 dtk): "Jangan berhenti. Terus jalan." (oranye bold)\nScene 8: "@chondik"\nMusik: piano emosional → crescendo hopeful.`},{id:30,day:30,platform:'instagram',format:'Carousel + CTA',pilar:'promo',emoji:'🎯',title:'Penutup bulan 1 — Ebook + ajakan komunitas',preview:'Closing bulan pertama dengan CTA terkuat.',desc:'Konten penutup + promo ebook setelah 29 hari trust.',time:'19.00–21.00',eng:'High',tip:'Momen terbaik konversi. 30 hari bersama = siap beli.',caption:`30 hari saya berbagi di sini.\n\nSekarang saya ajak kamu selangkah lebih jauh.\n\nSaya tulis pengalaman 20 tahun perjalanan saya dalam ebook yang bisa dibaca dalam 1 jam.\n\n"Jangan Terlambat Seperti Saya."\n\nBukan untuk yang sudah sukses. Tapi untuk yang sedang cari arah, merasa salah jalan, atau takut sudah terlambat.\n\nHarga: Rp 49.000.\nDM kata "MAULAGI" untuk harga spesial hari ini saja.`,hashtags:['#chondik','#ebookindonesia','#janganterlambat','#30hari','#pengembangandirisendiri'],prompt:`Carousel 3 slide 1080x1080px.\nSlide 1: Background oranye — "30 Hari. Terima Kasih." putih besar\nSlide 2: Mockup ebook + "Jangan Terlambat Seperti Saya" + "Rp 49.000"\nSlide 3: "DM kata MAULAGI" (BESAR oranye) + @chondik`,capcut:`Scene 1: "30 hari." (BESAR oranye)\nScene 2: "Terima kasih sudah di sini."\nScene 3: "Jangan Terlambat Seperti Saya" (judul besar putih)\nScene 4: "Rp 49.000" (oranye BESAR)\nScene 5: "DM kata MAULAGI hari ini." (bold)\nScene 6: "@chondik — Jangan Terlambat"\nMusik: uplifting hopeful ending.`}];
+
+// ========== STATE ==========
+let content=[...month1];
+let curMonth=1;
+let curMonthLabel='Bulan 1 — Juni 2026';
+let checked=JSON.parse(localStorage.getItem('ck_done')||'{}');
+let activeF='all';
+let curId=null,curTab='caption';
+
+const pilC={cerita:['#FEF3C7','#92400E'],waktu:['#FEE2E2','#991B1B'],tips:['#EDE9FE','#5B21B6'],engage:['#DBEAFE','#1E40AF'],promo:['#CCFBF1','#0F766E']};
+const pilL={cerita:'🟠 Cerita',waktu:'🔴 Waktu',tips:'🟣 Tips',engage:'🔵 Engage',promo:'🟢 Promo'};
+const pbM={instagram:'pb-ig',facebook:'pb-fb',youtube:'pb-yt'};
+const pnM={instagram:'📷 IG',facebook:'👥 FB',youtube:'▶️ YT'};
+const eB={'Very High':'#D1FAE5','High':'#DBEAFE','Medium-High':'#FEF3C7'};
+const eT={'Very High':'#065F46','High':'#1E40AF','Medium-High':'#92400E'};
+
+function getF(){
+  if(activeF==='pending') return content.filter(t=>!checked[t.id]);
+  if(activeF==='all') return content;
+  return content.filter(t=>t.platform===activeF||t.pilar===activeF);
+}
+
+function render(){
+  const data=getF();
+  const g=document.getElementById('grid');
+  if(!data.length){g.innerHTML='<div style="padding:32px 14px;text-align:center;color:var(--g500);font-size:.78rem;">Tidak ada konten untuk filter ini.</div>';updateStats();return;}
+  g.innerHTML=data.map(t=>{
+    const pc=pilC[t.pilar]||['#F3F4F6','#374151'];
+    const done=!!checked[t.id];
+    return `<div class="card${done?' done':''}" id="c${t.id}">
+      <div class="card-top">
+        <span class="pbadge ${pbM[t.platform]||'pb-ig'}">${pnM[t.platform]||t.platform}</span>
+        <span class="ftag">${t.format}</span>
+      </div>
+      <div class="card-prev">
+        <div class="prev-emoji">${t.emoji}</div>
+        <div class="prev-text">${t.preview}</div>
+      </div>
+      <div class="card-body">
+        <div class="pilar-tag" style="background:${pc[0]};color:${pc[1]}">${pilL[t.pilar]||t.pilar}</div>
+        <div class="card-title">Hari ${t.day} — ${t.title}${done?'<span class="done-badge">✓ Posted</span>':''}</div>
+        <div class="card-desc">${t.desc}</div>
+        <div class="card-meta">
+          <span class="meta-i">⏰ ${t.time}</span>
+          <span class="eng-tag" style="background:${eB[t.eng]||'#DBEAFE'};color:${eT[t.eng]||'#1E40AF'}">🔥 ${t.eng}</span>
+        </div>
+        <div class="card-tip"><strong>💡 Tips</strong>${t.tip}</div>
+        <div class="card-btns">
+          <button class="btn-cc" onclick="cpCap(${t.id},this)">📋 Copy Caption</button>
+          <button class="btn-det" onclick="openModal(${t.id})">Detail</button>
+          <button class="btn-chk${done?' done':''}" onclick="toggleDone(${t.id})" title="Tandai sudah posting">${done?'✓':'○'}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  updateStats();
+}
+
+function updateStats(){
+  const tot=content.length;
+  const dn=Object.keys(checked).filter(k=>checked[k]).length;
+  document.getElementById('statTotal').textContent=tot;
+  document.getElementById('statDone').textContent=dn;
+  document.getElementById('statLeft').textContent=tot-dn;
+  const p=tot?Math.round((dn/tot)*100):0;
+  document.getElementById('progFill').style.width=p+'%';
+  document.getElementById('progLabel').textContent=`${dn} dari ${tot} konten sudah diposting (${p}%)`;
+}
+
+function toggleDone(id){
+  checked[id]=!checked[id];
+  localStorage.setItem('ck_done',JSON.stringify(checked));
+  render();
+}
+
+function cpCap(id,btn){
+  const t=content.find(x=>x.id===id);
+  navigator.clipboard.writeText(t.caption+'\n\n'+t.hashtags.join(' ')).then(()=>{
+    const o=btn.innerHTML;btn.innerHTML='✅ Tersalin!';btn.classList.add('ok');
+    setTimeout(()=>{btn.innerHTML=o;btn.classList.remove('ok');},2000);
+  });
+}
+
+function setF(f,btn){
+  activeF=f;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function swBio(t,btn){
+  document.querySelectorAll('.bio-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.bio-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('bio-'+t).classList.add('active');
+  btn.classList.add('active');
+}
+function cpBio(id,btn){
+  navigator.clipboard.writeText(document.getElementById(id).textContent.trim()).then(()=>{
+    const o=btn.innerHTML;btn.innerHTML='✅ Tersalin!';btn.classList.add('ok');
+    setTimeout(()=>{btn.innerHTML=o;btn.classList.remove('ok');},2000);
+  });
+}
+
+function openModal(id){
+  curId=id;curTab='caption';
+  const t=content.find(x=>x.id===id);
+  document.getElementById('mTitle').textContent=`Hari ${t.day} — ${t.title}`;
+  document.getElementById('mMeta').textContent=`${pnM[t.platform]||t.platform} | ${t.format} | ${pilL[t.pilar]}`;
+  document.getElementById('mCaption').textContent=t.caption;
+  document.getElementById('mPrompt').textContent=t.prompt||'Tidak perlu prompt visual untuk konten ini.';
+  document.getElementById('mCapcut').textContent=t.capcut||'Lihat tab Caption.';
+  document.getElementById('mHashtags').innerHTML=t.hashtags.map(h=>`<span class="htag" onclick="cpHash(this,'${h}')">${h}</span>`).join('');
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.mtab')[0].classList.add('active');
+  ['caption','prompt','capcut','hashtag'].forEach(s=>{
+    document.getElementById('ms-'+s).classList.toggle('active',s==='caption');
+  });
+  updMCopy();
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function swTab(tab,btn){
+  curTab=tab;
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  ['caption','prompt','capcut','hashtag'].forEach(s=>{
+    document.getElementById('ms-'+s).classList.toggle('active',s===tab);
+  });
+  updMCopy();
+}
+function updMCopy(){
+  const lb={caption:'📋 Copy Caption + Hashtag',prompt:'📋 Copy Prompt ChatGPT',capcut:'📋 Copy Teks CapCut',hashtag:'📋 Copy Semua Hashtag'};
+  document.getElementById('mcopyBtn').textContent=lb[curTab]||'📋 Copy';
+}
+function copyModal(){
+  const t=content.find(x=>x.id===curId);
+  let tx='';
+  if(curTab==='caption') tx=t.caption+'\n\n'+t.hashtags.join(' ');
+  else if(curTab==='prompt') tx=t.prompt||'';
+  else if(curTab==='capcut') tx=t.capcut||'';
+  else tx=t.hashtags.join(' ');
+  navigator.clipboard.writeText(tx).then(()=>{
+    const btn=document.getElementById('mcopyBtn');
+    const o=btn.textContent;btn.textContent='✅ Tersalin!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('ok');},2000);
+  });
+}
+function cpHash(el,tag){navigator.clipboard.writeText(tag).then(()=>{const o=el.textContent;el.textContent='✓';setTimeout(()=>el.textContent=o,1000);});}
+function closeModal(e){if(e.target===document.getElementById('overlay')){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}}
+
+// ========== AI GENERATE ==========
+function showKeyModal(){document.getElementById('keyOverlay').classList.add('open');}
+function confirmKey(){
+  const key=document.getElementById('apiKeyInput').value.trim();
+  if(!key||!key.startsWith('sk-')){alert('Masukkan API key yang valid (dimulai dengan sk-)');return;}
+  document.getElementById('keyOverlay').classList.remove('open');
+  startGenerate(key);
+}
+
+const mNames=['','Juli 2026','Agustus 2026','September 2026','Oktober 2026','November 2026','Desember 2026','Januari 2027','Februari 2027','Maret 2027','April 2027','Mei 2027','Juni 2027'];
+const themes=['Aksi dan Langkah Konkret — fokus pada eksekusi nyata dan cara mulai bergerak','Karir dan Penghasilan — fokus pada karir, income, dan skill yang menghasilkan','Mindset Pengusaha — fokus pada cara berpikir dan mental bisnis','Produktivitas dan Waktu — fokus pada manajemen waktu dan kebiasaan sehari-hari','Personal Branding — fokus pada membangun reputasi dan nilai diri','Relationship dan Lingkungan — fokus pada pentingnya komunitas dan koneksi','Uang dan Finansial — fokus pada literasi keuangan untuk anak muda'];
+
+async function startGenerate(apiKey){
+  const gen=document.getElementById('genOverlay');
+  const fill=document.getElementById('genFill');
+  const sub=document.getElementById('genSub');
+  gen.classList.add('open');
+  let p=5;
+  const iv=setInterval(()=>{if(p<85){p+=Math.random()*7;fill.style.width=Math.min(p,85)+'%';}},900);
+  const nm=curMonth;
+  const nextLabel=mNames[nm]||`Bulan ${nm+1}`;
+  const theme=themes[(nm-1)%themes.length];
+  sub.textContent=`Membuat 30 konten untuk ${nextLabel}... (30–60 detik)`;
+  const prompt=`Kamu adalah content strategist untuk personal brand "Chondik Faradilla" — pengusaha Malang, perjalanan dari pengamen ke founder bisnis. Target: anak muda 18–30 tahun yang merasa salah jalan.\n\nBuatkan 30 konten untuk ${nextLabel} dengan tema: ${theme}\n\nFormat JSON array persis seperti ini (HANYA JSON, tidak ada teks lain):\n[{"id":1,"day":1,"platform":"instagram","format":"Reels · Teks+Musik","pilar":"cerita","emoji":"🎸","title":"judul","preview":"preview singkat","desc":"deskripsi singkat","time":"19.00–21.00","eng":"Very High","tip":"tips eksekusi","caption":"caption panjang bahasa Indonesia santai dari sudut pandang Chondik","hashtags":["#chondik","#lainnya"],"prompt":"prompt ChatGPT detail untuk buat visual","capcut":"panduan teks CapCut scene by scene dengan durasi"}]\n\nAturan:\n- platform: campuran instagram, facebook, youtube\n- pilar: campuran cerita, waktu, tips, engage, promo (max 3 promo)\n- eng: Very High/High/Medium-High\n- caption: panjang, personal, dari pengalaman nyata Chondik\n- Berbeda dari bulan sebelumnya\nHANYA kembalikan JSON array saja.`;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:16000,messages:[{role:'user',content:prompt}]})});
+    clearInterval(iv);fill.style.width='90%';
+    if(!res.ok){const e=await res.json();throw new Error(e.error?.message||'API error '+res.status);}
+    const data=await res.json();
+    const raw=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
+    const clean=raw.replace(/```json|```/g,'').trim();
+    const nc=JSON.parse(clean);
+    if(!Array.isArray(nc)||nc.length===0) throw new Error('Format tidak valid');
+    const base=curMonth*100;
+    nc.forEach((item,i)=>{item.id=base+i+1;});
+    content=nc;curMonth++;
+    curMonthLabel=`Bulan ${curMonth} — ${nextLabel}`;
+    document.getElementById('monthLabel').textContent=curMonthLabel;
+    checked={};localStorage.setItem('ck_done',JSON.stringify(checked));
+    fill.style.width='100%';
+    sub.textContent=`✅ ${nc.length} konten untuk ${nextLabel} sudah siap!`;
+    setTimeout(()=>{
+      gen.classList.remove('open');
+      activeF='all';
+      document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+      document.querySelector('.fbtn').classList.add('active');
+      render();
+    },1500);
+  }catch(err){
+    clearInterval(iv);fill.style.width='100%';fill.style.background='#DC2626';
+    sub.textContent='❌ Gagal: '+(err.message||'Cek koneksi internet dan API key, lalu coba lagi.');
+    setTimeout(()=>{gen.classList.remove('open');fill.style.background='#E8500A';},3500);
+  }
+}
+render();
+</script>
+</body>
+</html>
